@@ -7,14 +7,9 @@ def recourse_files(root_path):
     """
     This func traverse from the root_path over the filesystem tree,
     and print the names of all files in the same tree.
-    :param root_path = The path from which the filesystem tree starts. Can get a PathWalker object as well.
+    :param root_path = The path from which the filesystem tree starts.
     """
-    # If inserted PathWalker object.
-    if type(root_path) == PathWalker:
-        root_path = root_path.get_path()
-
-    else:
-        check_path_name(root_path)
+    check_path_name(root_path)
 
     if os.path.isfile(root_path):
         print(root_path)
@@ -98,7 +93,7 @@ class PathWalker:
             raise ValueError("The system cannot find the path specified. " + os.path.join(self._path_name, item))
 
     def __iter__(self):
-        return iter([os.path.join(self._path_name, f) for f in os.listdir(self._path_name)])
+        return iter([PathWalker(os.path.join(self._path_name, f)) for f in os.listdir(self._path_name)])
 
     def get_path(self):
         """
@@ -106,8 +101,23 @@ class PathWalker:
         """
         return self._path_name
 
+    def recourse_files(self):
+        """
+        This func traverse from the self._path_name over the filesystem tree,
+        and print the names of all files in the same tree.
+        """
+        if os.path.isfile(self._path_name):
+            print(self._path_name)
+
+        for sub_walker in self:
+            if os.path.isfile(sub_walker._path_name):
+                print(sub_walker._path_name)
+            else:
+                sub_walker.recourse_files()
+
 
 def main():
+
     recourse_files(ROOT_PATH)
     # walker = PathWalker(ROOT_PATH)
     # recourse_files(walker)
@@ -119,6 +129,7 @@ def main():
     #
     # for subwalker in walker:
     #     print(subwalker)
+    # walker.recourse_files()
 
 
 if __name__ == '__main__':
