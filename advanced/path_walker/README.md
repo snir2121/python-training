@@ -13,9 +13,9 @@ In this exercise, you'll implement several ways to traverse over your computer's
 The first way is via the `os` module, which serves as a bridge for common operating system actions.
 
 The second way also use the `os` module, but via a class named `PathWalker` that you'll implement yourself.
-The class should be a good example for the object oriented programming (OOP) contept.
+The class should be a good example for the object oriented programming (OOP) concept.
 
-You must write good unit tests. The tests should be ablel to run on every computer, and not be dependent on your machine.
+You must write good unit tests. The tests should be able to run on every computer, and not be dependent on your machine.
 Also, the code should be cross-platform, meaning it need to support both Windows and Unix-based operating systems.
 
 > :warning: Consulting with others regarding technical work is generally a good idea. With regular work, it's encouraged to pair programming and helping each other.
@@ -58,7 +58,7 @@ PathWalker("C:\\Program Files\\Common Files")
 C:\\Program Files\\Common Files
 ```
 
-The class should implement the `__getitem__` method so that you can access the walker's decendents:
+The class should implement the `__getitem__` method so that you can access the walker's decedents:
 
 ```
 >>> print(repr(walker["Microsoft Shared"]))
