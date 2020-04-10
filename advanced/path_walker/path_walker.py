@@ -3,39 +3,6 @@ import os
 ROOT_PATH = r"C:\Users\SNIR-PC\Desktop\backup\snir\school&courses\python_playground\kumpus_course\6-Modules"
 
 
-def recourse_files(root_path):
-    """
-    This func traverse from the root_path over the filesystem tree,
-    and print the names of all files in the same tree.
-    :param root_path = The path from which the filesystem tree starts.
-    """
-    check_path_name(root_path)
-
-    if os.path.isfile(root_path):
-        print(root_path)
-
-    only_files_lst = [f for f in os.listdir(root_path) if os.path.isfile(os.path.join(root_path, f))]
-    only_dir_lst = [d for d in os.listdir(root_path) if os.path.isdir(os.path.join(root_path, d))]
-
-    for file in only_files_lst:
-        print(os.path.join(root_path, file))
-
-    for dir_ in only_dir_lst:
-        recourse_files(os.path.join(root_path, dir_))
-
-
-def check_path_name(path_name):
-    """
-    Checks if the path_name is a valid path.
-    :raise TypeError or FileNotFoundError otherwise.
-    """
-    if type(path_name) != str:
-        raise TypeError("file or directory can't be a '%s' object" % path_name.__class__.__name__)
-
-    elif not os.path.isfile(path_name) and not os.path.isdir(path_name):
-        raise FileNotFoundError("The system cannot find the path specified. " + path_name)
-
-
 class PathWalker:
     """
     Class that represent a path name.
@@ -117,19 +84,15 @@ class PathWalker:
 
 
 def main():
-
-    recourse_files(ROOT_PATH)
-    # walker = PathWalker(ROOT_PATH)
-    # recourse_files(walker)
+    walker = PathWalker(ROOT_PATH)
     # print(repr(walker))
     # print(walker)
     # print(repr(walker["drawing_photo.jpg"]))
     # print(repr(walker[".."]))
     # print(repr(walker["."]))
-    #
     # for subwalker in walker:
-    #     print(subwalker)
-    # walker.recourse_files()
+    #     print(repr(subwalker))
+    walker.recourse_files()
 
 
 if __name__ == '__main__':
